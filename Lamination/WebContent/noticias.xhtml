@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css"></style>
+	<f:loadBundle basename="beans.mensajes" var="msjs" />
+	<title><h:outputText value="#{msjs.VentanaPrincipal}" /></title>
+</h:head>
+<h:body
+	style="background-image: url(../Imagenes/fondo.jpg); background-size:100%">
+	<table>
+		<tr>
+			<td><h:graphicImage value="/Imagenes/cabeza.png">
+
+				</h:graphicImage></td>
+			<td align="right" valign="top" width="100%"><h:form>
+					<p:commandButton value="#{msjs.Salir}"
+						action="#{userBean.cerrarSesion}" />
+				</h:form></td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<h:panelGrid columns="4">
+				<h:form>
+					<p:commandButton value="Auditoria" />
+					<p:commandButton value="Gestion de usuarios" ajax="false"
+						action="#{userBean.gestionDeUsuarios}" />
+					<p:commandButton value="Parametros" ajax="false"
+						action="parametros" />
+					<p:commandButton value="Agregar Noticia" ajax="false" action="agregarNoticias" />
+				</h:form>
+			</h:panelGrid>
+		</tr>
+	</table>
+
+	<table>
+
+
+
+		<tr>
+			<td><h:form>
+					<p:dataScroller  var="news"
+						chunkSize="10">
+						<f:facet name="header">  Noticias. </f:facet>
+
+						<f:facet name="loader">
+							<p:commandButton type="button" value=""
+								icon="ui-icon-circle-triangle-s" />
+						</f:facet>
+
+						<h:panelGrid columns="2" style="width:100%"
+							columnClasses="logo,detail">
+							<p:graphicImage name="/Imagenes/pdf.png" width="30" height="30" />
+
+							<p:outputPanel>
+								<h:panelGrid columns="2" cellpadding="7">
+									<h:outputText value="Id User:" />
+									<h:outputText value="#{news.idUser}" style="font-weight: bold" />
+
+									<h:outputText value="Descripción:" />
+									<h:outputText value="#{news.shortDescription}" style="font-weight: bold" />
+
+									<h:outputText value="Noticia:" />
+									<h:outputText value="#{news.largeDescription}" style="font-weight: bold" />
+									
+									<h:outputText value="Stado: "/>
+									<h:outputText value="#{news.state}"/>
+								</h:panelGrid>
+							</p:outputPanel>
+						</h:panelGrid>
+					</p:dataScroller>
+				</h:form></td>
+		</tr>
+
+	</table>
+	
+</h:body>
+</html>

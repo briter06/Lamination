@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+    <style type="text/css">
+    body{
+		background-image: url(#{userBean.imagenFondo});
+		background-size:100%;
+	}
+    </style>
+    <f:loadBundle basename="beans.mensajes" var="msjs" />
+        <title>
+            <h:outputText value="#{msjs.VentanaPrincipal}"/>
+        </title>
+</h:head>
+<h:body > 
+    <table>
+    	<tr>
+    	<td ><h:graphicImage width="180" height="200" value="/Imagenes/logo.png">
+        	
+        	</h:graphicImage></td><td align="right" valign = "top" width="100%" >
+        		<h:form>
+        	    	<p:commandButton value="#{msjs.Salir}" ajax="false" action="#{userBean.cerrarSesion}"/>
+				</h:form>
+        	
+        	</td>
+        </tr>
+    </table>
+
+    <table style="width:100%">
+        <tr>
+        	<td>
+        	<h:form style="width:100%">
+            		<table style="width:100%">
+            			<tr>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="#{msjs.perfil}" ajax="false"  action="#{userBean.prepararPerfil}"/>
+            				</td>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="#{msjs.Repetidas}" ajax="false" action="#{userBean.laminasRepetidas}"/>
+            				</td>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="#{msjs.Faltantes}" ajax="false" action="#{userBean.laminasFalatantes}"/>
+            				</td>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="Buscar laminas" ajax="false" action = "#{userBean.buscarLaminas}"/>
+            				</td>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="Agregar noticia" ajax="false" action = "#{newBean.prepararNoticia}"/>
+            				</td>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="Mensajes" ajax="false"/>
+            				</td>
+            			</tr>
+            		</table>
+                	
+                	
+                	
+                	
+            	</h:form>
+        	</td>
+            	
+                
+        </tr>
+    </table>
+    <table align="center">
+
+
+
+		<tr>
+			<td align="center"><h:form>
+			
+			
+					<p:commandButton value="Agregar Mensaje"></p:commandButton>
+					<p:dataTable id="mensajes" value="#{messageBean.mensajes}" var="mensaje" paginator="true" rows="10" selection="#{messageBean.mensajeAEnviar}" rowKey = "#{mensaje.id}" selectionMode="single">
+						<f:facet name="header">
+				            Mensajes
+				        </f:facet>
+				        <p:column headerText="Usuario" filterBy="#{mensaje.idUser1}" sortBy="#{mensaje.idUser1}" filterMatchMode="startsWith">
+				            <h:outputText value="#{messageBean.usuario.userName}" />
+				        </p:column>
+				        <p:column headerText="Fecha" filterBy="#{mensaje.date}" sortBy="#{mensaje.date}" filterMatchMode="startsWith">
+				            <h:outputText value="#{mensaje.date}" />
+				        </p:column>
+					</p:dataTable>
+					
+					<p:contextMenu for="mensajes">
+				        <p:menuitem value="Ver usuario" ajax="false" update="userD" oncomplete="PF('inicioSesionBloqueoP').show()"/>
+				        <p:menuitem value="Ver mensaje" ajax="false"/>
+				    </p:contextMenu>
+					<p:dialog header="Información del usuario" widgetVar="userV"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+						<p:outputPanel id="userD" style="text-align:center;">
+							<p:panelGrid columns="2" columnClasses="label,value">
+								
+
+								<!-- <h:outputText value="Usuario:" />
+								<h:outputText value="#{messageBean.usuario.userName}" />
+
+								<h:outputText value="Nombre completo:" />
+								<h:outputText value="#{messageBean.usuario.fullName}" />
+
+								<h:outputText value="Correo:" />
+								<h:outputText value="#{messageBean.usuario.emailAddress}" />
+
+								<h:outputText value="Teléfono:" />
+								<h:outputText value="#{messageBean.usuario.phoneNumber}" /> -->
+
+								
+
+
+							</p:panelGrid>
+
+							<p:commandButton ajax="false" value="Enviar Mensaje"></p:commandButton>
+						</p:outputPanel>
+					</p:dialog>
+					
+					
+					<p:dialog modal="true" showEffect="slide" style="color:red" widgetVar="inicioSesionBloqueoP">
+									<p:outputLabel value="Usuario ha sido bloqueado por exceder el número de intentos"></p:outputLabel>
+						        </p:dialog>
+				</h:form></td>
+		</tr>
+		
+
+	</table>
+    
+</h:body> 
+</html>
