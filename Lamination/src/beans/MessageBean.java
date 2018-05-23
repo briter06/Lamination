@@ -14,7 +14,7 @@ import service.UserService;
 @SessionScoped
 public class MessageBean {
 	private List<Message> mensajes;
-	//Pepe GAYYYYYYYYYY
+	//Pepe cambio todo
 	private MessageService messageService = new MessageService();
 	private Message mensajeAEnviar;
 	private User usuario;
