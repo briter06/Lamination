@@ -1,6 +1,5 @@
 package beans;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
