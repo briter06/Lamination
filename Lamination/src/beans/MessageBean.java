@@ -15,6 +15,7 @@ import service.UserService;
 @SessionScoped
 public class MessageBean {
 	private List<Message> mensajes;
+	
 	private MessageService messageService = new MessageService();
 	private Message mensajeAEnviar;
 	private User usuario;
